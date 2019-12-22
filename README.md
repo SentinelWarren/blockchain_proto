@@ -1,11 +1,13 @@
 ## blockchain_prototyping [barebone-blockchain]
 Experimenting around blockchain implementation [code base].
 
+
 ### Tools
 
 - python3
 - flask
-- Postman
+- Postman || Swagger
+
 
 ### Testing the blockchain
 
@@ -13,3 +15,8 @@ Experimenting around blockchain implementation [code base].
 - Download or Clone the repo `git clone https://github.com/SentinelWarren/blockchain_prototyping.git`
 - Run `blockchain.py` located in `"blockchain_prototyping\src\skeleton[arch]"`
 - You can now test the `blockchain`in Postman/Swagger Inspector with GET method [will be available at `http://127.0.0.1:5000]`, i.e `http://127.0.0.1:5000/mine_block`
+
+
+### Contributing
+
+All Contributions are welcome! Please feel free to submit a Pull Request or any other None pull request sharing via email if any.
