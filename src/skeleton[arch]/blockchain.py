@@ -36,13 +36,13 @@ class Bchain:
         self.chain.append(block)
         return block
 
-     ## model to get a pervious_block in the blockchain
+     ## function to get a pervious_block in the blockchain
     def get_prev_block(self):
         return self.chain[-1]
 
-    ## A function to calculate proof of work[solution] from the defined problem
+    ## function to calculate proof of work[solution] from the defined problem
     def proof_of_work(self, previous_proof):
-        ## needed for attempts of find a solution by incrementation till solved
+        ## needed for attempts of finding a solution by incrementation till solved
         new_proof = 1
 
         ## Once we find the solution it will be == True
@@ -50,7 +50,7 @@ class Bchain:
 
         ## While loop till check_proof == True
         while check_proof is False:
-            ## Hash operations to solve the problem using hashlib module when the miner mines.. 
+            ## Hash operations to solve the problem using hashlib module when the miner mines.
             ## Note, the problem used here is pretty basic, however it can be tweaked to any hardest problem preferable i.e. Energy consumption, verifying CO2 emition through the smartmeters and GU operations etc etc.
             hash_ops = hashlib.sha256(
                 str(new_proof**2 - previous_proof**2).encode()).hexdigest()
