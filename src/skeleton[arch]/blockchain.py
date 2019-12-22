@@ -1,7 +1,21 @@
+#!/usr/bin/env python
+"""Experimenting around blockchain implementation [code base]"""
+
 import datetime
 import hashlib
 import json
 from flask import Flask, jsonify
+
+
+__author__ = "SentinelWarren"
+__credits__= ""
+
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "SentinelWarren"
+__email__ = "warrenkalolo@gmail.com"
+__status__ = "Prototype"
+
 
 ## Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable )
 class Bchain:
