@@ -1,16 +1,16 @@
 import datetime
 import hashlib
 import json
-#from flask import flask, jsonify
+from flask import Flask, jsonify
 
 
 class Bchain:
     def __init__(self):
         self.chain = []
-        # genesis block
+        ## genesis block
         self.create_block(proof=1, previous_hash="0")
 
-    # new block creation function
+    ## new block creation function
     def create_block(self, proof, previous_hash):
         block = {"index": len(self.chain) + 1,
                  "timestamp": str(datetime.datetime.now()),
@@ -61,4 +61,38 @@ class Bchain:
         return True
 
 
-# print("test")
+
+# Web part
+app = Flask(__name__)
+
+
+# Creating a Blockchain
+blockchain = Bchain()
+
+# Mining the new_block
+@app.route('/mine_block', methods = ['GET'])
+
+def mine_block():
+    previous_block = blockchain.get_prev_block()
+    previous_proof = previous_block["proof"]
+    proof = blockchain.proof_of_work(previous_proof)
+    previous_hash = blockchain.hash(previous_block)
+
+    block = blockchain.create_block(proof, previous_hash)
+    response = {"message": "Congrats, you just mined the block!",
+                "index": block['index'],
+                "timestamp": block["proof"],
+                "previous_hash": block["previous_hash"]}
+    return jsonify(response), 200
+
+
+# Getting the full Blockchain
+@app.route('/get_chain', methods = ['GET'])
+
+def get_chain():
+    response = {"chain": blockchain.chain,
+                "length": len(blockchain.chain)}
+    return jsonify(response), 200
+
+
+app.run(host = '0.0.0.0', port=5000)
