@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Experimenting around blockchain implementation [code base]"""
+""" Experimenting around blockchain implementation [code base] """
 
 import datetime
 import hashlib
@@ -17,16 +17,20 @@ __email__ = "warrenkalolo@gmail.com"
 __status__ = "Prototype"
 
 
-## Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable )
+
 class Bchain:
+    """ Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable ) """
+
     def __init__(self):
         ## The chain pocket, Array is just fine since we don't wanna reverse anything.
         self.chain = []
-        ## genesis block
+
+        ## Genesis block
         self.create_block(proof=1, previous_hash="0")
 
-    ## new block creation function, Note, its {Immutable}
     def create_block(self, proof, previous_hash):
+    """ new block creation function, Note, its {Immutable} """
+
         block = {"index": len(self.chain) + 1,
                  "timestamp": str(datetime.datetime.now()),
                  "proof": proof,
@@ -36,12 +40,14 @@ class Bchain:
         self.chain.append(block)
         return block
 
-     ## function to get a pervious_block in the blockchain
     def get_prev_block(self):
+    """ function to get a pervious_block in the blockchain """
+
         return self.chain[-1]
 
-    ## function to calculate proof of work[solution] from the defined problem
     def proof_of_work(self, previous_proof):
+        """ function to calculate proof of work[solution] from the defined problem """
+
         ## needed for attempts of finding a solution by incrementation till solved
         new_proof = 1
 
@@ -60,14 +66,16 @@ class Bchain:
                 new_proof += 1
         return new_proof
 
-    ## hash function that takes a block and return the sha256 cryptographic hash[The most secure one currently].
     def hash(self, block):
+        """ hash function that takes a block and return the sha256 cryptographic hash[The most secure one currently]. """
+
         encoded_block = json.dumps(block, sort_keys=True).encode()
 
         return hashlib.sha256(encoded_block).hexdigest()
 
-    ## A function to check if everything is right and valid in the blockchain
     def is_chain_valid(self, chain):
+        """ A function to check if everything is right and valid in the blockchain """
+
         ## First block of the chain
         previous_block = chain[0]
         ## Looping variable
@@ -104,8 +112,9 @@ blockchain = Bchain()
 # Mining the new_block
 @app.route('/mine_block', methods = ['GET'])
 
-## A mining function, pretty explanatory.
 def mine_block():
+    """ A mining function, pretty explanatory. """
+
     previous_block = blockchain.get_prev_block()
     previous_proof = previous_block["proof"]
     proof = blockchain.proof_of_work(previous_proof)
@@ -122,8 +131,9 @@ def mine_block():
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
 
-## A function for getting the chain value,
 def get_chain():
+    """ A function for getting the chain value """
+
     response = {"chain": blockchain.chain,
                 "length": len(blockchain.chain)}
     return jsonify(response), 200
@@ -132,8 +142,9 @@ def get_chain():
 ## Checking if the blockchain is valid
 @app.route('/is_chain_valid', methods = ['GET'])
 
-## A blockchain verification function, can be seen in action in postman
 def is_bchain_valid():
+    """ A blockchain verification function, can be seen in action in postman """
+
     is_valid = blockchain.is_chain_valid(blockchain.chain)
 
     if is_valid:
