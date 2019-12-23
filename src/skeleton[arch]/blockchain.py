@@ -8,7 +8,7 @@ from flask import Flask, jsonify
 
 
 __author__ = "SentinelWarren"
-__credits__= ""
+__credits__ = ""
 
 __license__ = "MIT"
 __version__ = "0.1"
@@ -17,47 +17,44 @@ __email__ = "warrenkalolo@gmail.com"
 __status__ = "Prototype"
 
 
-
 class Bchain:
     """ Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable ) """
 
     def __init__(self):
-        ## The chain pocket, Array is just fine since we don't wanna reverse anything.
+        # The chain pocket, Array is just fine since we don't wanna reverse anything.
         self.chain = []
 
-        ## Genesis block
+        # Genesis block
         self.create_block(proof=1, previous_hash="0")
 
     def create_block(self, proof, previous_hash):
     """ new block creation function, Note, its {Immutable} """
 
         block = {"index": len(self.chain) + 1,
-                 "timestamp": str(datetime.datetime.now()),
-                 "proof": proof,
-                 "previous_hash": previous_hash}
+                "timestamp": str(datetime.datetime.now()),
+                "proof": proof,
+                "previous_hash": previous_hash}
 
-        ## Appending to the pocket :)
+        # Appending to the pocket :)
         self.chain.append(block)
         return block
 
-    def get_prev_block(self):
     """ function to get a pervious_block in the blockchain """
-
-        return self.chain[-1]
+    def get_prev_block(self): return self.chain[-1]
 
     def proof_of_work(self, previous_proof):
         """ function to calculate proof of work[solution] from the defined problem """
 
-        ## needed for attempts of finding a solution by incrementation till solved
+        # needed for attempts of finding a solution by incrementation till solved
         new_proof = 1
 
-        ## Once we find the solution it will be == True
+        # Once we find the solution it will be == True
         check_proof = False
 
-        ## While loop till check_proof == True
+        # While loop till check_proof == True
         while check_proof is False:
-            ## Hash operations to solve the problem using hashlib module when the miner mines.
-            ## Note, the problem used here is pretty basic, however it can be tweaked to any hardest problem preferable i.e. Energy consumption, verifying CO2 emition through the smartmeters and GU operations etc etc.
+            # Hash operations to solve the problem using hashlib module when the miner mines.
+            # Note, the problem used here is pretty basic, however it can be tweaked to any hardest problem preferable i.e. Energy consumption, verifying CO2 emition through the smartmeters and GU operations etc etc.
             hash_ops = hashlib.sha256(
                 str(new_proof**2 - previous_proof**2).encode()).hexdigest()
             if hash_ops[:4] == "0000":
@@ -76,30 +73,32 @@ class Bchain:
     def is_chain_valid(self, chain):
         """ A function to check if everything is right and valid in the blockchain """
 
-        ## First block of the chain
+        # First block of the chain
         previous_block = chain[0]
-        ## Looping variable
+        # Looping variable
         block_index = 1
 
-        ## A while loop to check if the looping variable is less than the length of the chain iterate on all the chains
+        # A while loop to check if the looping variable is less than the length of the chain iterate on all the chains
         while block_index < len(chain):
-            ## First block
+            # First block
             block = chain[block_index]
 
-            ## If the previous_hash of current block is different than the previous block return False since its invalid
-            if block["previous_hash"] != self.hash(previous_block): return False
+            # If the previous_hash of current block is different than the previous block return False since its invalid
+            if block["previous_hash"] != self.hash(previous_block):
+                return False
             previous_proof = previous_block["proof"]
             proof = block["proof"]
-            ## hash operations
-            hash_ops = hashlib.sha256(str(new_proof**2 - previous_proof**2).encode()).hexdigest()
+            # hash operations
+            hash_ops = hashlib.sha256(
+                str(new_proof**2 - previous_proof**2).encode()).hexdigest()
 
-            ## If the hash operations first 4/four char aren't matching
+            # If the hash operations first 4/four char aren't matching
             if hash_ops[:4] != "0000":
                 return False
             previous_block = block
             block_index += 1
 
-        ## If everything is gucci return True
+        # If everything is gucci return True
         return True
 
 
@@ -110,8 +109,7 @@ app = Flask(__name__)
 blockchain = Bchain()
 
 # Mining the new_block
-@app.route('/mine_block', methods = ['GET'])
-
+@app.route('/mine_block', methods=['GET'])
 def mine_block():
     """ A mining function, pretty explanatory. """
 
@@ -129,8 +127,7 @@ def mine_block():
 
 
 # Getting the full Blockchain
-@app.route('/get_chain', methods = ['GET'])
-
+@app.route('/get_chain', methods=['GET'])
 def get_chain():
     """ A function for getting the chain value """
 
@@ -139,9 +136,8 @@ def get_chain():
     return jsonify(response), 200
 
 
-## Checking if the blockchain is valid
-@app.route('/is_chain_valid', methods = ['GET'])
-
+# Checking if the blockchain is valid
+@app.route('/is_chain_valid', methods=['GET'])
 def is_bchain_valid():
     """ A blockchain verification function, can be seen in action in postman """
 
@@ -155,6 +151,5 @@ def is_bchain_valid():
     return jsonify(response), 200
 
 
-
-## Serving our simple blockchain prototype
-app.run(host = '0.0.0.0', port=5000)
+# Serving our simple blockchain prototype
+app.run(host='0.0.0.0', port=5000)
