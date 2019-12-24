@@ -8,7 +8,7 @@ from flask import Flask, jsonify
 
 
 __author__ = "SentinelWarren"
-__credits__ = ""
+__credits__ = "{contributor names go here!}"
 
 __license__ = "MIT"
 __version__ = "0.1"
@@ -16,7 +16,7 @@ __maintainer__ = "SentinelWarren"
 __email__ = "warrenkalolo@gmail.com"
 __status__ = "Prototype"
 
-
+# Buildig a blockchain class
 class Bchain:
     """ Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable ) """
 
@@ -28,12 +28,8 @@ class Bchain:
         self.create_block(proof=1, previous_hash="0")
 
     def create_block(self, proof, previous_hash):
-    """ new block creation function, Note, its {Immutable} """
-
-        block = {"index": len(self.chain) + 1,
-                "timestamp": str(datetime.datetime.now()),
-                "proof": proof,
-                "previous_hash": previous_hash}
+        """new block creation function, Note, its {Immutable}"""
+        block = {"index": len(self.chain) + 1, "timestamp": str(datetime.datetime.now()), "proof": proof, "previous_hash": previous_hash}
 
         # Appending to the pocket :)
         self.chain.append(block)
