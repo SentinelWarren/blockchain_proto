@@ -30,7 +30,7 @@ class Blockchain:
 
         # Genesis block
         self.create_block(proof=1, previous_hash='0')
-        self.node = set()
+        self.nodes = set()
 
     def create_block(self, proof, previous_hash):
         """new block creation function, Note, its {Immutable}"""
@@ -115,6 +115,7 @@ class Blockchain:
 
     def add_node(self, address):
         parsed_url = urlparse(address)
+        self.nodes.add(parsed_url.netloc)
         self.nodes.add(parsed_url.netloc)
 
     def replace_chain(self):
