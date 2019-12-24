@@ -181,7 +181,7 @@ def get_chain():
 
 # Checking if the blockchain is valid
 @app.route('/is_chain_valid', methods=['GET'])
-def is_bchain_valid():
+def is_chain_valid():
     """ A blockchain verification function, can be seen in action in postman """
 
     is_valid = blockchain.is_chain_valid(blockchain.chain)
