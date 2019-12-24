@@ -196,7 +196,7 @@ def is_chain_valid():
 @app.route('/add_transaction', methods=['POST'])
 def add_transaction():
     jsn = request.get_json()
-    transaction_keys = ["sender", "receive", "amount"]
+    transaction_keys = ["sender", "receiver", "amount"]
 
     if not all (key in jsn for key in transaction_keys):
         return "Some elements on the transaction are missing", 400

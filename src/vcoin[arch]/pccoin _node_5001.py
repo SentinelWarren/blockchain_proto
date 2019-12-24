@@ -196,13 +196,13 @@ def is_chain_valid():
 #Adding new transaction to the Blockchain
 @app.route('/add_transaction', methods=['POST'])
 def add_transaction():
-    jsn = request.get_json()
-    transaction_keys = ["sender", "receive", "amount"]
+    json = request.get_json()
+    transaction_keys = ["sender", "receiver", "amount"]
 
-    if not all (key in jsn for key in transaction_keys):
+    if not all (key in json for key in transaction_keys):
         return "Some elements on the transaction are missing", 400
 
-    index = blockchain.add_transaction(jsn["sender"], jsn["receiver"], jsn["amount"])
+    index = blockchain.add_transaction(json["sender"], json["receiver"], json["amount"])
     response = {"message": f'This transaction will be added to Block {index}'}
     return jsonify(response), 201
 
