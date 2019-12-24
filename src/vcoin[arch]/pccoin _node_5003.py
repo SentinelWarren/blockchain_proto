@@ -89,16 +89,14 @@ class Blockchain:
             block = chain[block_index]
 
             # If the previous_hash of current block is different than the previous block return False since its invalid
-            if block["previous_hash"] != self.hash(previous_block):
-                return False
+            if block["previous_hash"] != self.hash(previous_block): return False
             previous_proof = previous_block["proof"]
             proof = block["proof"]
             # hash operations
             hash_ops = hashlib.sha256(str(proof**2 - previous_proof**2).encode()).hexdigest()
 
             # If the hash operations first 4/four char aren't matching
-            if hash_ops[:4] != "0000":
-                return False
+            if hash_ops[:4] != "0000": return False
             previous_block = block
             block_index += 1
 
@@ -123,7 +121,7 @@ class Blockchain:
         max_len = len(self.chain)
 
         for node in network:
-            response = requests.get(f"http://{node}/get_chain")
+            response = requests.get(f'http://{node}/get_chain')
 
             if response.status_code == 200:
                 length = response.json()["length"]
