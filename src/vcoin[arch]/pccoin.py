@@ -29,7 +29,7 @@ class Blockchain:
         self.transactions = []
 
         # Genesis block
-        self.create_block(proof=1, previous_hash='0')
+        self.create_block(proof = 1, previous_hash='0')
         self.nodes = set()
 
     def create_block(self, proof, previous_hash):
@@ -41,7 +41,7 @@ class Blockchain:
                  'transactions': self.transactions}
 
         # Adding transaction to block | Appending chain to the pocket :)
-        self.transactions
+        self.transactions = []
         self.chain.append(block)
         return block
 
