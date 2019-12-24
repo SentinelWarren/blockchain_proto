@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" Experimenting around blockchain implementation [Virtual coin code base] """
+""" Implementing a Cryptocurrency (Virtual coin [gccoin] code base) """
 
 import datetime
 import hashlib
@@ -19,7 +19,7 @@ __maintainer__ = "SentinelWarren"
 __email__ = "warrenkalolo@gmail.com"
 __status__ = "Prototype"
 
-# Building a Crypto [gccoin]
+# Building a Blockchain
 class Blockchain:
     """ Defining a blockchain class (it could be anything, Blockchain, Energychain, Wifichain, Shulechain whatever suitable ) """
 
@@ -29,12 +29,16 @@ class Blockchain:
         self.transactions = []
 
         # Genesis block
-        self.create_block(proof=1, previous_hash="0")
+        self.create_block(proof=1, previous_hash='0')
         self.node = set()
 
     def create_block(self, proof, previous_hash):
         """new block creation function, Note, its {Immutable}"""
-        block = {"index": len(self.chain) + 1, "timestamp": str(datetime.datetime.now()), "proof": proof, "previous_hash": previous_hash, "transactions": self.transactions}
+        block = {'index': len(self.chain) + 1,
+                 'timestamp': str(datetime.datetime.now()),
+                 'proof': proof,
+                 'previous_hash': previous_hash,
+                 'transactions': self.transactions}
 
         # Adding transaction to block | Appending chain to the pocket :)
         self.transactions
@@ -57,8 +61,7 @@ class Blockchain:
         while check_proof is False:
             # Hash operations to solve the problem using hashlib module when the miner mines.
             # Note, the problem used here is pretty basic, however it can be tweaked to any hardest problem preferable i.e. Energy consumption, verifying CO2 emition through the smartmeters and GU operations etc etc.
-            hash_ops = hashlib.sha256(
-                str(new_proof**2 - previous_proof**2).encode()).hexdigest()
+            hash_ops = hashlib.sha256(str(new_proof**2 - previous_proof**2).encode()).hexdigest()
             if hash_ops[:4] == "0000":
                 check_proof = True
             else:
@@ -91,8 +94,7 @@ class Blockchain:
             previous_proof = previous_block["proof"]
             proof = block["proof"]
             # hash operations
-            hash_ops = hashlib.sha256(
-                str(new_proof**2 - previous_proof**2).encode()).hexdigest()
+            hash_ops = hashlib.sha256(str(proof**2 - previous_proof**2).encode()).hexdigest()
 
             # If the hash operations first 4/four char aren't matching
             if hash_ops[:4] != "0000":
@@ -203,6 +205,38 @@ def add_transaction():
     response = {"message": f'This transaction will be added to Block {index}'}
     return jsonify(response), 201
 
+#Connecting new nodes
+@app.route('/connect_node', methods=['POST'])
+def connect_node():
+    jsn = request.get_json()
+    nodes = jsn.get("nodes")
+
+    if nodes is None:
+        return "No node", 400
+
+    for node in nodes:
+        blockchain.add_node(node)
+
+    response = {"message": "All the nodes are now connected. The pccoin blockchain now contains the following nodes:",
+    "total_nodes": list(blockchain.nodes)}
+
+    return jsonify(response), 201
+
+# Replacing the chain by the longest chain if needed
+@app.route('/replace_chain', methods=['GET'])
+def replace_chain():
+    """ A blockchain verification function, can be seen in action in postman """
+
+    is_chain_replaced = blockchain.replace_chain()
+
+    if is_chain_replaced:
+        response = {"message": "The Nodes had diff chains so the chain was replaced by the longest one!",
+        "new_chain": blockchain.chain}
+    else:
+        response = {"message": "All good. The chain is the largest one!",
+        "actual_chain": blockchain.chain}
+
+    return jsonify(response), 200
 
 # Serving our simple blockchain prototype
 app.run(host='0.0.0.0', port=5000)
