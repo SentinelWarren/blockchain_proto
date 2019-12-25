@@ -1,0 +1,1000 @@
+{
+	"info": {
+		"_postman_id": "07edd3e4-a5fb-4dd3-8c76-fde179f24948",
+		"name": "Blockchain mining [manual",
+		"description": "Test the blockchain and crypto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post_requests",
+			"item": [
+				{
+					"name": "5001 connect_node",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/connect_node",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"connect_node"
+							]
+						},
+						"description": "Connecting 50001_node to the rest of the nodes"
+					},
+					"response": []
+				},
+				{
+					"name": "5002 connect_node",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5001\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/connect_node",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"connect_node"
+							]
+						},
+						"description": "Connecting 50002_node to the rest of the nodes"
+					},
+					"response": []
+				},
+				{
+					"name": "5003 connect_node",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5001\",\r\n    \"http://127.0.0.1:5002\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/connect_node",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"connect_node"
+							]
+						},
+						"description": "Connecting 50001_node to the rest of the nodes"
+					},
+					"response": []
+				},
+				{
+					"name": "5001 add_transactions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"Warren\",\r\n    \"receiver\": \"Second_miner\",\r\n    \"amount\": 1500\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/add_transaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"add_transaction"
+							]
+						},
+						"description": "5001_node adding new transaction to the Blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "5002 add_transactions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"Second_miner\",\r\n    \"receiver\": \"other_miner\",\r\n    \"amount\": 500\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/add_transaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"add_transaction"
+							]
+						},
+						"description": "5002_node adding new transaction to the Blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "5003 add_transactions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"other_miner\",\r\n    \"receiver\": \"Warren\",\r\n    \"amount\": 1000\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/add_transaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"add_transaction"
+							]
+						},
+						"description": "5003_node adding new transaction to the Blockchain"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get_requests",
+			"item": [
+				{
+					"name": "5001 get_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/get_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"get_chain"
+							]
+						},
+						"description": "'GET' the full Blockchain 5001_node request"
+					},
+					"response": []
+				},
+				{
+					"name": "5002 get_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/get_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"get_chain"
+							]
+						},
+						"description": "'GET' the full Blockchain 5002_node request"
+					},
+					"response": []
+				},
+				{
+					"name": "5003 get_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/get_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"get_chain"
+							]
+						},
+						"description": "'GET' the full Blockchain 5003_node request"
+					},
+					"response": []
+				},
+				{
+					"name": "5001 replace_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/replace_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"replace_chain"
+							]
+						},
+						"description": "Replace 5001_node chain by the longest chain"
+					},
+					"response": []
+				},
+				{
+					"name": "5002 replace_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/replace_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"replace_chain"
+							]
+						},
+						"description": "Replace 5002_node chain by the longest chain"
+					},
+					"response": []
+				},
+				{
+					"name": "5003 replace_chain",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/replace_chain",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"replace_chain"
+							]
+						},
+						"description": "Replace 5003_node chain by the longest chain"
+					},
+					"response": []
+				},
+				{
+					"name": "5001 mine_block",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/mine_block",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"mine_block"
+							]
+						},
+						"description": "5001_node Mining block request"
+					},
+					"response": []
+				},
+				{
+					"name": "5002 mine_block",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/mine_block",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"mine_block"
+							]
+						},
+						"description": "5002_node Mining block request"
+					},
+					"response": []
+				},
+				{
+					"name": "5003 mine_block",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/mine_block",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"mine_block"
+							]
+						},
+						"description": "5003_node Mining block request"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "saved_test_req",
+			"item": [
+				{
+					"name": "test_req_1",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5003/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5003/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5003",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5003/replace_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5003/replace_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5003",
+									"path": [
+										"replace_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5003/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5003/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5003",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/replace_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/replace_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"replace_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5001/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5001/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5001",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5001/replace_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5001/replace_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5001",
+									"path": [
+										"replace_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5002/get_chain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5002/get_chain",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5002",
+									"path": [
+										"get_chain"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5001/mine_block",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nodes\": [\r\n    \"http://127.0.0.1:5002\",\r\n    \"http://127.0.0.1:5003\"\r\n  ]\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5001/mine_block",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5001",
+									"path": [
+										"mine_block"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
