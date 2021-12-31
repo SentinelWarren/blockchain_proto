@@ -8,9 +8,10 @@ from uuid import uuid4
 from urllib.parse import urlparse
 
 from typing import Any, List, Set, Dict, TypedDict
+from dataclasses import dataclass
 import requests
 
-
+@dataclass
 class Block(TypedDict):
     """Block class"""
     index: int
